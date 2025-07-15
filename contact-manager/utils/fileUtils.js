@@ -15,6 +15,7 @@ const saveToJson = function (contact) {
 
 const readFromJson = function () {
     try {
+        console.log('Loading contacts from contacts.json...')
         const data = fs.readFileSync(filePath, 'utf-8');
         const contacts = JSON.parse(data);
         console.log(`✓ Loaded ${contacts.length} contacts`)
@@ -26,4 +27,4 @@ const readFromJson = function () {
 
 }
 
-module.exports = {saveToJson,readFromJson}
+module.exports = { saveToJson, readFromJson }
