@@ -1,35 +1,9 @@
+const {readFromJson , saveToJson} = require("../utils/fileUtils");
 
-let contacts = [ 
-
-             {
-                name: "John Doe",
-                email: "amichdy@gmail,com",
-                phone: "123-456-7890"
-            },
-
-            {
-                name: "Jane33333 Smith",
-                email: "amichdddddddy@gmsdsdil,fdfm",
-                phone: "987-654-3210",
-
-            },
-             {
-                name: "Jane Smith",
-                email: "amichfdfdy@gmdsssdl,fdfm",
-                phone: "987-654-3210",
-
-            },
-             {
-                name: "Jane Smith",
-                email: "amichdy@sddsgmail,fdfm",
-                phone: "987-654-3210",
-
-            }
-
-]
 
 
 function listContact(){
+     const contacts = readFromJson();
     if(contacts.length ===0){
         console.log("=== is Empty ===")
     }else{
@@ -43,7 +17,7 @@ function listContact(){
 
 
 function searchContact(name){
-            // const contacts = readFromJson();
+            const contacts = readFromJson();
             console.log(`=== Search Results for "${name}" ===`)
              const arr =contacts.filter(contact=> contact.name === name);
               if(arr.length > 0){
@@ -55,26 +29,21 @@ function searchContact(name){
             }
         }
 
-   
-
-
-
-
-
 function addContant(name ,email,phone ){
-    
-//  validationEmail(email);
-//  validationPhone(phone);
+    const contacts = readFromJson();
     contacts.push({ 
         name: name, 
         email: email, 
         phone: phone 
     });
+    saveToJson(contacts)
     console.log(`✓ Contact added: ${name}`)
+
 }
 
 
 function deleteContact(email) {
+    const contacts = readFromJson();
     const index = contacts.findIndex(c => c.email == email);
     let x = contacts.find(c=>c.email === email);
     if (index !== -1) {
@@ -83,14 +52,12 @@ function deleteContact(email) {
     } else {
         console.log(`✗ Error: No contact found with email: ${x.email}`);
     }
+    saveToJson(contacts)
 }
 
 
- searchContact("bb");
-deleteContact("amichfdfdy@gmdsssdl,fdfm")
 
-
-
+module.exports = {listContact,searchContact,addContant,deleteContact}
 
 
 
