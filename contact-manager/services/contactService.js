@@ -1,5 +1,5 @@
 const { readFromJson, saveToJson } = require("../utils/fileUtils");
-const validateEmail = require("../utils/validation");
+const validation = require("../utils/validation");
 
 
 
@@ -34,7 +34,8 @@ function searchContact(name) {
 
 function addContact(name, email, phone) {
 
-    validateEmail(email);
+    validation.validateEmail(email);
+    validation.validatePhoneNumber(phone)
     const contacts = readFromJson();
     if (!contacts.some(c => c.email.toLowerCase() === email.toLowerCase())) {
         contacts.push({
